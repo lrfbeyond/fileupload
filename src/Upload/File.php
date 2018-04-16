@@ -94,14 +94,14 @@ class File extends SplFileObject
 
         // 检查文件Mime类型
         if (isset($rule['type']) && !$this->checkMime($rule['type'])) {
-            $res['msg'] = '上传文件MIME类型不允许！';
+            $res['msg'] = '不允许的上传文件MIME类型！';
             echo json_encode($res);
             return false;
         }
 
         // 检查文件后缀
         if (isset($rule['ext']) && !$this->checkExt($rule['ext'])) {
-            $res['msg'] = '上传文件后缀不允许';
+            $res['msg'] = '不允许的上传文件后缀';
             echo json_encode($res);
             return false;
         }
