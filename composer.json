@@ -1,0 +1,17 @@
+{
+    "name": "lrfbeyond/uploader",
+    "description": "file upload",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yueguangguang",
+            "email": "13966913@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+    },
+    "autoload": {
+        "psr-4": { "Upload\\": "src/Upload" }
+    }
+}
