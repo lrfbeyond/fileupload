@@ -1,2 +1,6 @@
 # fileupload
-PHP file upload
+> PHP file upload
+
+```
+$ composer require lrfbeyond/uploader
+```
