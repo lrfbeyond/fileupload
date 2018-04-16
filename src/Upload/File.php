@@ -85,28 +85,28 @@ class File extends SplFileObject
     {
         $rule = $rule ?: $this->validate;
 
-        /* 检查文件大小 */
+        // 检查文件大小
         if (isset($rule['size']) && !$this->checkSize($rule['size'])) {
             $res['msg'] = '上传文件大小不符！';
             echo json_encode($res);
             return false;
         }
 
-        /* 检查文件Mime类型 */
+        // 检查文件Mime类型
         if (isset($rule['type']) && !$this->checkMime($rule['type'])) {
             $res['msg'] = '上传文件MIME类型不允许！';
             echo json_encode($res);
             return false;
         }
 
-        /* 检查文件后缀 */
+        // 检查文件后缀
         if (isset($rule['ext']) && !$this->checkExt($rule['ext'])) {
             $res['msg'] = '上传文件后缀不允许';
             echo json_encode($res);
             return false;
         }
 
-        /* 检查图像文件 */
+        // 检查图像文件
         if (!$this->checkImg()) {
             $res['msg'] = '非法图像文件！';
             echo json_encode($res);
@@ -169,7 +169,7 @@ class File extends SplFileObject
     public function checkImg()
     {
         $extension = strtolower(pathinfo($this->getInfo('name'), PATHINFO_EXTENSION));
-        /* 对图像文件进行严格检测 */
+        // 对图像文件进行严格检测
         if (in_array($extension, ['gif', 'jpg', 'jpeg', 'bmp', 'png', 'swf']) && !in_array($this->getImageType($this->filename), [1, 2, 3, 4, 6])) {
             return false;
         }
@@ -192,7 +192,7 @@ class File extends SplFileObject
      * @param  string|bool   $savename    保存的文件名 默认自动生成
      * @return string
      */
-    public function buildSaveName()
+    public function createSaveName()
     {
         switch ($this->rule) {
             case 'time':
@@ -235,7 +235,7 @@ class File extends SplFileObject
         }
         $path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         // 文件保存命名规则
-        $saveName = $this->buildSaveName();
+        $saveName = $this->createSaveName();
         $filename = $path . $saveName;
 
         // 检测目录
@@ -243,14 +243,14 @@ class File extends SplFileObject
             return false;
         }
 
-        /* 不覆盖同名文件 */
+        // 不覆盖同名文件
         if (!$replace && is_file($filename)) {
             $res['msg'] = '存在同名文件' . $filename;
             echo json_encode($res);
             return false;
         }
 
-        /* 移动文件 */
+        // 移动文件
         if (!move_uploaded_file($this->filename, $filename)) {
             $res['msg'] '文件上传保存错误！';
             echo json_encode($res);
@@ -266,9 +266,6 @@ class File extends SplFileObject
             'size' => $file->getSize()
         ];
         return $info;
-        // $file->setSaveName($saveName);
-        // $file->setUploadInfo($this->info);
-        // return $file;
     }
 
     // 如果方法不存在，则返回
