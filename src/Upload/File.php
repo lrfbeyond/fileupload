@@ -1,7 +1,6 @@
 <?php 
 namespace Upload;
 
-use SplFileInfo;
 use SplFileObject;
 
 class File extends SplFileObject
