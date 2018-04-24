@@ -223,7 +223,7 @@ class File extends SplFileObject
 
         // 检测合法性
         if (!$this->isValid()) {
-            $res['msg'] '非法上传文件';
+            $res['msg'] = '非法上传文件';
             echo json_encode($res);
             return false;
         }
@@ -251,7 +251,7 @@ class File extends SplFileObject
 
         // 移动文件
         if (!move_uploaded_file($this->filename, $filename)) {
-            $res['msg'] '文件上传保存错误！';
+            $res['msg'] = '文件上传保存错误！';
             echo json_encode($res);
             return false;
         }
